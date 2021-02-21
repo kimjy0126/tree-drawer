@@ -37,21 +37,21 @@ fn draw_tree_impl(window: &mut PistonWindow, fonts: &mut Glyphs, root: &Node) {
                 let node = node_q.pop_front().unwrap();
                 for c in node.childs.iter() {
                     line(color::BLACK, 1.0,
-                         [node.pos.1 * r, node.pos.0 * r, c.pos.1 * r, c.pos.0 * r],
+                         [node.pos.x * r, node.pos.y * r, c.pos.x * r, c.pos.y * r],
                          transform, g);
                     node_q.push_back(c);
                 }
                 ellipse(color::WHITE,
-                        rectangle::square((node.pos.1 - 1.0) * r + 0.5, (node.pos.0 - 1.0) * r + 0.5, r * 2.0 - 1.0),
+                        rectangle::square((node.pos.x - 1.0) * r + 0.5, (node.pos.y - 1.0) * r + 0.5, r * 2.0 - 1.0),
                         transform, g);
                 circle_arc(color::BLACK, 1.0, 0.0, f64::_360() as f64 * 1.2,
-                        [(node.pos.1 - 1.0) * r, (node.pos.0 - 1.0) * r, r * 2.0, r * 2.0],
+                        [(node.pos.x - 1.0) * r, (node.pos.y - 1.0) * r, r * 2.0, r * 2.0],
                         transform, g);
                 text::Text::new(32).draw(
                     &node.content,
                     &mut *fonts,
                     &c.draw_state,
-                    c.transform.trans(800.0 + node.pos.1 * r, 10.0 + r + node.pos.0 * r), g
+                    c.transform.trans(800.0 + node.pos.x * r, 10.0 + r + node.pos.y * r), g
                 ).unwrap();
 
                 fonts.factory.encoder.flush(device);

@@ -1,5 +1,6 @@
 use std::convert::TryFrom;
 use super::Node;
+use super::Coord;
 
 pub fn build_tree(input: String) -> Node {
     let input = input.trim();
@@ -66,5 +67,5 @@ fn build_tree_impl(input: &str, mat: &[i32]) -> Node {
     }
     let childs = childs;
 
-    Node { content, childs, range: 0, pos: (0.0, 0.0) }
+    Node { content, childs, range: 0, pos: Coord { x: 0.0, y: 0.0 } }
 }
