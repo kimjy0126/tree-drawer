@@ -23,6 +23,8 @@ pub fn draw_tree(root: &Node) {
 }
 
 fn draw_tree_impl(window: &mut PistonWindow, fonts: &mut Glyphs, root: &Node) {
+    let font_size = 32;
+
     while let Some(e) = window.next() {
         let mut node_q: VecDeque<&Node> = VecDeque::new();
         node_q.push_back(root.clone());
@@ -47,11 +49,14 @@ fn draw_tree_impl(window: &mut PistonWindow, fonts: &mut Glyphs, root: &Node) {
                 circle_arc(color::BLACK, 1.0, 0.0, f64::_360() as f64 * 1.2,
                         [(node.pos.x - 1.0) * r, (node.pos.y - 1.0) * r, r * 2.0, r * 2.0],
                         transform, g);
-                text::Text::new(32).draw(
+
+                let height = fonts.character(font_size, 'A').unwrap().top();
+                let width = fonts.width(font_size, &node.content).unwrap();
+                text::Text::new(font_size).draw(
                     &node.content,
                     &mut *fonts,
                     &c.draw_state,
-                    c.transform.trans(800.0 + node.pos.x * r, 10.0 + r + node.pos.y * r), g
+                    c.transform.trans(800.0 + node.pos.x * r - width / 2.0, 10.0 + r + node.pos.y * r + height as f64 / 2.0), g
                 ).unwrap();
 
                 fonts.factory.encoder.flush(device);
