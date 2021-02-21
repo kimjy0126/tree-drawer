@@ -9,3 +9,6 @@ edition = "2018"
 [dependencies]
 piston_window = "0.117.0"
 find_folder = "0.3.0"
+
+[profile.release]
+opt-level = 3
